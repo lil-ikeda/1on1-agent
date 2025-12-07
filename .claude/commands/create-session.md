@@ -45,6 +45,7 @@
 | SRE / インフラエンジニア | `./agents/tech-specialist-sre.md` |
 | MLエンジニア | `./agents/tech-specialist-ml.md` |
 | Backendエンジニア | `./agents/tech-specialist-backend.md` |
+| Frontendエンジニア | `./agents/tech-specialist-frontend.md` |
 
 ※ 役割が上記に該当しない場合は、最も近いものを選択するか、スキップ
 
