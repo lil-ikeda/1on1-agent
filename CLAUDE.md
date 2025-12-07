@@ -4,35 +4,43 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-1on1管理システム - EMとしてメンバーと1on1を行う際に、過去のセッション情報をもとに話すべき話題を提案するシステム。
+1on1 Management System - A system that proposes topics to discuss in 1on1 meetings based on past session history, designed for Engineering Managers.
 
 ## Commands
 
 ### `/init`
-マネージャー（自分自身）のプロファイルを作成する。対話形式で情報を収集し、`./manager-profile.md` を生成。
+Create your own manager profile. Collects information interactively and generates `./manager-profile.md`.
 
 ### `/create-user`
-新しいメンバーのプロファイルを作成する。対話形式で基本情報を収集し、`./users/{user_name}/` 配下にプロファイルを生成。
+Create a new team member profile. Collects basic information interactively and generates profile under `./users/{user_name}/`.
 
 ### `/create-session {user_name}`
-指定したメンバーの次回1on1セッション用ファイルを作成。マルチエージェントレビューを経て話題を3〜5個提案。
+Create a session file for the specified member's next 1on1. Proposes 3-5 topics after multi-agent review.
 
 ### `/complete-session {user_name}`
-1on1セッション終了後の処理。文字起こしをもとにメンバー評価・マネージャーレビューを実施。
+Post-session processing. Performs member assessment and manager review based on transcript.
 
 ## Directory Structure
 
 ```
 1on1-agent/
-├── .claude/commands/     # スラッシュコマンド定義
-├── agents/               # エージェントプロファイル
-├── templates/            # テンプレートファイル
-├── samples/              # サンプルファイル（参考用）
-├── users/                # ユーザーデータ（.gitignore対象）
-└── manager-profile.md    # マネージャープロファイル（.gitignore対象）
+├── .claude/commands/     # Slash command definitions
+├── agents/               # Agent profiles
+├── templates/            # Template files
+├── samples/              # Sample files (for reference)
+│   ├── en/               # English samples
+│   └── ja/               # Japanese samples
+├── users/                # User data (.gitignore target)
+└── manager-profile.md    # Manager profile (.gitignore target)
 ```
+
+## Language Settings
+
+- Agent instructions and templates use English section headers for consistent parsing
+- Content language is determined by manager's Language Settings in `manager-profile.md`
+- Each user can override the 1on1 language in their profile
 
 ## Notes
 
-- セッション履歴は直近最大10件を読み込む
-- `users/` ディレクトリと `manager-profile.md` は個人情報を含むため `.gitignore` で除外済み
+- Session history loads up to 10 most recent files
+- `users/` directory and `manager-profile.md` are excluded via `.gitignore` as they contain personal information
