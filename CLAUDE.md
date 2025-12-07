@@ -8,7 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-### `/init`
+### `/setup-manager`
 Create your own manager profile. Collects information interactively and generates `./manager-profile.md`.
 
 ### `/create-user`

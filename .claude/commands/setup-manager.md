@@ -1,4 +1,4 @@
-# init
+# setup-manager
 
 Performs initial setup for the 1on1 management system.
 Creates a profile for the manager (yourself).

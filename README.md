@@ -57,7 +57,7 @@ By defining the EM's values and style in `manager-profile.md`, the AI functions 
 flowchart TB
     subgraph PREP["Initial Setup Phase"]
         direction TB
-        A["/init"] --> B["manager-profile.md created"]
+        A["/setup-manager"] --> B["manager-profile.md created"]
         B --> C["/create-user"]
         C --> D["profile.md created"]
     end
@@ -124,7 +124,7 @@ flowchart TB
 
 2. **Initial setup**
    ```
-   /init
+   /setup-manager
    ```
    Creates your own profile through interactive dialogue.
 
@@ -166,7 +166,7 @@ flowchart TB
 1on1-agent/
 ├── .claude/
 │   └── commands/           # Slash command definitions
-│       ├── init.md
+│       ├── setup-manager.md
 │       ├── create-user.md
 │       ├── create-session.md
 │       └── complete-session.md
@@ -215,12 +215,12 @@ After adding, update the tech agent selection table in `create-session.md`.
 
 ### Editing Manager Profile
 
-The `manager-profile.md` created by `/init` can be manually edited anytime. Refer to samples in `samples/en/manager-profile.md` or `samples/ja/manager-profile.md`.
+The `manager-profile.md` created by `/setup-manager` can be manually edited anytime. Refer to samples in `samples/en/manager-profile.md` or `samples/ja/manager-profile.md`.
 
 ### Language Settings
 
 The system supports multilingual output:
-- Configure your preferred language in `manager-profile.md` during `/init`
+- Configure your preferred language in `manager-profile.md` during `/setup-manager`
 - Each team member can have a different 1on1 language in their profile
 - Session files and feedback will be generated in the configured language
 

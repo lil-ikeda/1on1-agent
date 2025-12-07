@@ -19,29 +19,28 @@
 
 ## Preparation (AI Generated & Reviewed)
 
-### Topics to Discuss
-1.
-2.
-3.
+### Topic 1: {{topic_title}}
 
-### Background & Intent for Each Topic
+**Suggested Questions**:
 -
 
----
+**Background**:
 
-## Session Notes (Manual Entry)
 
-### Topics Discussed
+### Topic 2: {{topic_title}}
+
+**Suggested Questions**:
 -
 
-### Member's Comments & Insights
+**Background**:
+
+
+### Topic 3: {{topic_title}}
+
+**Suggested Questions**:
 -
 
-### Action Items for Next Time
-- [ ]
-
-### Items to Follow Up
--
+**Background**:
 
 ---
 
@@ -82,18 +81,12 @@
 
 ---
 
-## Reflection (Manual Entry)
+## Action Items
 
-### Session Impressions
--
-
-### Profile Update Notes
-<!-- Information to reflect in profile.md after this session -->
--
+- [ ]
 
 ---
 
 ## Free Notes
 
-<!-- Other notes about this session -->
-
+<!-- Other notes, reflections, or items to update in profile.md -->

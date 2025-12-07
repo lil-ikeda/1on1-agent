@@ -34,7 +34,9 @@ Read the following files:
 
 ### 3. Confirm Requests from Member
 
-Ask the user: "Does the member have any specific topics they want to discuss? (Press Enter if none)"
+Ask the user: "Does the member have any specific topics they want to discuss? (Enter topics or 'n' for none)"
+
+- If the answer is "n", "-", or "none", treat it as no specific topics
 
 ### 4. Topic Proposal Generation (3-4 Stage Review)
 
@@ -88,8 +90,10 @@ Create `./users/$ARGUMENTS/sessions/YYYY-MM-DD.md` based on `./templates/session
 
 - Use today's date
 - Include requests from member if any
-- Fill "Topics to Discuss" section with final topics
-- Fill "Background & Intent for Each Topic" section with intent for each topic
+- Fill the Preparation section with 3-5 topics, each containing:
+  - **Topic title** as the heading
+  - **Suggested Questions**: 2-3 specific questions to ask during the 1on1
+  - **Background**: Context and intent for why this topic is important now
 - All content should be in the determined output language
 
 ### 7. Completion Report
