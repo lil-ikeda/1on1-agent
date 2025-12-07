@@ -1,99 +1,99 @@
-# 1on1 セッション - {{user_name}} - {{date}}
+# 1on1 Session - {{user_name}} - {{date}}
 
-## セッション情報
+## Session Info
 
-| 項目 | 内容 |
-|------|------|
-| 日時 | {{date}} |
-| 場所/形式 | オフライン / オンライン |
-| 所要時間 | 分 |
+| Item | Value |
+|------|-------|
+| Date/Time | {{date}} |
+| Location/Format | Offline / Online |
+| Duration | min |
 
 ---
 
-## メンバーからのリクエスト
+## Requests from Member
 
-<!-- 事前にメンバーから話したいと言われていた内容 -->
+<!-- Topics the member requested to discuss beforehand -->
 -
 
 ---
 
-## 事前準備（AI生成・レビュー済み）
+## Preparation (AI Generated & Reviewed)
 
-### 今回話すべき話題
+### Topics to Discuss
 1.
 2.
 3.
 
-### 各話題の背景・意図
+### Background & Intent for Each Topic
 -
 
 ---
 
-## セッション記録（手動記入）
+## Session Notes (Manual Entry)
 
-### 話した内容
+### Topics Discussed
 -
 
-### 本人から出た発言・本音
+### Member's Comments & Insights
 -
 
-### 次回までのアクション
+### Action Items for Next Time
 - [ ]
 
-### 次回フォローすべき事項
+### Items to Follow Up
 -
 
 ---
 
-## メンバー評価スコア（AI算出）
+## Member Assessment Score (AI Generated)
 
-| 指標 | スコア | 前回比 | 根拠 |
-|------|--------|--------|------|
-| 退職リスク | /5 | | |
-| 休職リスク | /5 | | |
-| モチベーション | /5 | | |
+| Metric | Score | Change | Rationale |
+|--------|-------|--------|-----------|
+| Turnover Risk | /5 | | |
+| Burnout Risk | /5 | | |
+| Motivation | /5 | | |
 
-### アラート
-<!-- スコア4以上の項目がある場合に記載 -->
+### Alerts
+<!-- Note any items with score 4 or higher -->
 -
 
 ---
 
-## マネージャーレビュー（AI算出）
+## Manager Review (AI Generated)
 
-### 総合評価: ☆☆☆☆☆ (/5)
+### Overall Rating: ☆☆☆☆☆ (/5)
 
-| 観点 | 評価 | コメント |
-|------|------|----------|
-| 傾聴度 | ☆☆☆☆☆ | |
-| 質問力 | ☆☆☆☆☆ | |
-| フォローアップ | ☆☆☆☆☆ | |
-| サポート力 | ☆☆☆☆☆ | |
-| 話題設計 | ☆☆☆☆☆ | |
+| Aspect | Rating | Comment |
+|--------|--------|---------|
+| Active Listening | ☆☆☆☆☆ | |
+| Quality of Questions | ☆☆☆☆☆ | |
+| Follow-up | ☆☆☆☆☆ | |
+| Support Provided | ☆☆☆☆☆ | |
+| Topic Selection | ☆☆☆☆☆ | |
 
-### 良かった点
+### What Went Well
 -
 
-### 改善点
+### Areas for Improvement
 -
 
-### 次回意識すること
--
-
----
-
-## 振り返り（手動記入）
-
-### セッションの所感
--
-
-### プロファイル更新メモ
-<!-- セッション後にprofile.mdに反映すべき情報があればここにメモ -->
+### Focus Points for Next Session
 -
 
 ---
 
-## フリーメモ
+## Reflection (Manual Entry)
 
-<!-- その他、このセッションについて記録しておきたいこと -->
+### Session Impressions
+-
+
+### Profile Update Notes
+<!-- Information to reflect in profile.md after this session -->
+-
+
+---
+
+## Free Notes
+
+<!-- Other notes about this session -->
 

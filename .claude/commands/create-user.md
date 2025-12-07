@@ -1,32 +1,44 @@
 # create-user
 
-新しいメンバーのプロファイルを作成します。
+Creates a new team member profile.
 
-## 手順
+## Language Setting
 
-1. 以下の情報を一問一答形式でユーザーに質問してください：
-   - ユーザー名（ディレクトリ名として使用、英数字推奨）
-   - 表示名（日本語可）
-   - メールアドレス
-   - 所属チーム
-   - 役割（例：QAエンジニア、バックエンドエンジニア、SRE、MLエンジニア など）
-   - 役職・グレード
-   - 入社日
-   - チーム配属日
+Before starting, read `./manager-profile.md` to determine the System Output Language.
+All user-facing prompts and output content should be in the manager's configured System Output Language.
 
-2. `./users/{user_name}/` ディレクトリを作成
+## Procedure
 
-3. `./users/{user_name}/sessions/` ディレクトリを作成
+1. Ask the user the following information in a Q&A format:
+   - Username (used as directory name, alphanumeric recommended)
+   - Display name (localized name is fine)
+   - Email address
+   - Team
+   - Role (e.g., QA Engineer, Backend Engineer, SRE, ML Engineer, Frontend Engineer)
+   - Title/Grade
+   - Join date
+   - Team assignment date
+   - **Language Profile**:
+     - Primary Language
+     - Secondary Languages (optional)
+     - 1on1 Language (language to use in 1on1 with this member; leave empty to use manager's default)
 
-4. `./templates/user-profile.md` をベースに `./users/{user_name}/profile.md` を作成
-   - 収集した情報を埋め込む
-   - 「作成日」「最終更新」には今日の日付を使用
+2. Create the `./users/{user_name}/` directory
 
-5. 作成完了後、以下を表示：
-   - 作成したファイルのパス
-   - 次のステップ（プロファイルの詳細を手動で追記することを案内）
+3. Create the `./users/{user_name}/sessions/` directory
 
-## 注意事項
+4. Create `./users/{user_name}/profile.md` based on `./templates/user-profile.md`
+   - Fill in the collected information
+   - Use today's date for "Created" and "Last Updated"
+   - Section headers should remain in English for system parsing
+   - Content values should be in the member's 1on1 Language (or manager's default if not specified)
 
-- ユーザー名は英数字とハイフン、アンダースコアのみ使用可能
-- 既に同名のユーザーが存在する場合は警告を表示し、上書きするか確認
+5. After creation, display:
+   - Path of the created file
+   - Next steps (guide user to manually add detailed profile information)
+
+## Important Notes
+
+- Username may only contain alphanumeric characters, hyphens, and underscores
+- If a user with the same name already exists, show a warning and confirm whether to overwrite
+- For samples, refer to `./samples/en/users/` or `./samples/ja/users/`

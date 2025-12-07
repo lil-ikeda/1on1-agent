@@ -1,125 +1,150 @@
 # init
 
-1on1管理システムの初期セットアップを行います。
-マネージャー（あなた自身）のプロファイルを作成します。
+Performs initial setup for the 1on1 management system.
+Creates a profile for the manager (yourself).
 
-## 事前確認
+## Pre-check
 
-1. `./manager-profile.md` が既に存在するか確認
-2. 存在する場合は「既にマネージャープロファイルが存在します。上書きしますか？ (y/n)」と確認
+1. Check if `./manager-profile.md` already exists
+2. If it exists, ask "A manager profile already exists. Do you want to overwrite it? (y/n)"
 
-## 手順
+## Procedure
 
-以下の情報を一問一答形式でユーザーに質問してください。
-各質問では、なぜその情報が必要かを簡単に説明してください。
+Ask the user the following information in a Q&A format.
+For each question, briefly explain why that information is needed.
 
-### 1. 基本情報
+### 0. Language Settings
 
-- **名前**: 「あなたの名前を教えてください（エージェントがあなたの人格を持つために使用します）」
-- **役職**: 「現在の役職を教えてください（例：開発部EM、VPoE）」
-- **マネジメント経験**: 「マネジメント経験はどのくらいですか？（例：約2年）」
-- **エンジニア歴**: 「エンジニアとしての経験年数を教えてください」
-- **経歴・背景**: 「簡単な経歴を教えてください（例：SIer→スタートアップ→現職）」
+First, collect language preferences:
 
-### 2. 1on1スタイル
+- **Primary Language**: "What is your primary language? (e.g., English, Japanese)"
+- **Secondary Languages**: "What other languages do you speak? (optional)"
+- **System Output Language**: "What language should system outputs (documentation, session files, agent feedback) be in?"
+- **1on1 Default Language**: "What language do you typically use in your 1on1 sessions?"
 
-- **1on1で大事にしていること**: 「1on1で大事にしていることを3つ教えてください（例：本音を引き出す、成長機会の提供）」
-- **コミュニケーションスタイル**: 「1on1でのコミュニケーションスタイルを教えてください（例：傾聴重視、質問中心）」
-- **1on1の目的**: 「1on1の目的は何だと考えていますか？」
-- **メンバーに対するスタンス**: 「メンバーに対する基本的なスタンスを教えてください」
+### 1. Basic Information
 
-### 3. 自己理解
+- **Name**: "What is your name? (The agent will use this to embody your personality)"
+- **Title**: "What is your current title? (e.g., Engineering Manager, VPoE)"
+- **Management Experience**: "How long have you been in a management role? (e.g., ~2 years)"
+- **Engineering Experience**: "How many years of engineering experience do you have?"
+- **Background**: "Please share a brief career background (e.g., SIer → Startup → Current)"
 
-- **MBTI**: 「MBTIタイプを教えてください（わからなければスキップ可）」
-  - タイプ名だけでなく、「その特徴で1on1に影響しそうなこと」も聞く
-- **ストレングスファインダー TOP5**: 「ストレングスファインダーのTOP5を教えてください（わからなければスキップ可）」
-  - 各資質について「実務でどう表れるか」も聞く
-- **弱み・苦手なこと**: 「自覚している弱みや苦手なことを教えてください」
+### 2. 1on1 Style
 
-## 出力
+- **Core Values in 1on1s**: "What are 3 things you value most in 1on1s? (e.g., drawing out true feelings, providing growth opportunities)"
+- **Communication Style**: "What is your communication style in 1on1s? (e.g., listening-focused, question-driven)"
+- **1on1 Purpose**: "What do you think is the purpose of 1on1s?"
+- **Stance Towards Team Members**: "What is your fundamental stance towards team members?"
 
-収集した情報をもとに `./manager-profile.md` を作成してください。
+### 3. Self-Understanding
 
-### ファイル構成
+- **MBTI**: "What is your MBTI type? (Can skip if unknown)"
+  - Ask not just the type, but also "What characteristics might affect your 1on1s"
+- **StrengthsFinder TOP5**: "What are your top 5 StrengthsFinder strengths? (Can skip if unknown)"
+  - For each strength, ask "How does this show up in your work"
+- **Weaknesses**: "What weaknesses or challenges are you aware of?"
+
+## Output
+
+Based on the collected information, create `./manager-profile.md`.
+
+Use `./templates/manager-profile.md` as the base template.
+
+The output content (values, descriptions) should be in the user's specified System Output Language, but section headers should remain in English for system parsing.
+
+### File Structure
 
 ```markdown
-# マネージャーエージェント
+# Manager Profile - {name}
 
-あなたは{名前}の人格を持ったエージェントです。
-1on1セッションの話題を提案する初稿を作成してください。
+**Created**: {date}
+**Last Updated**: {date}
 
 ---
 
-## あなたの人格・特性
+## Language Settings
 
-### 基本情報
-- 役職: {役職}
-- マネジメント経験: {マネジメント経験}
-- エンジニア歴: {エンジニア歴}
-- 経歴・背景: {経歴}
+### Personal Languages
+| Item | Value |
+|------|-------|
+| Primary Language | {primary_language} |
+| Secondary Languages | {secondary_languages} |
 
-### 1on1で大事にしていること
-- {大事にしていること1}
-- {大事にしていること2}
-- {大事にしていること3}
+### System Output Language
+| Item | Language |
+|------|----------|
+| Documentation | {doc_language} |
+| Session Files | {session_language} |
+| Agent Feedback | {feedback_language} |
 
-### コミュニケーションスタイル
-- {スタイル}
+### 1on1 Default Language
+- Default: {1on1_language}
 
-### 1on1の根本的なスタンス
-- **目的**: {目的}
-- **メンバーに対するスタンス**: {スタンス}
+---
+
+## Basic Information
+
+| Item | Value |
+|------|-------|
+| Name | {name} |
+| Title | {title} |
+| Management Experience | {management_exp} |
+| Engineering Experience | {engineering_exp} |
+| Background | {background} |
+
+---
+
+## 1on1 Philosophy
+
+### Core Values in 1on1s
+- {value1}
+- {value2}
+- {value3}
+
+### Communication Style
+- {style}
+
+### Fundamental Stance
+- **Purpose**: {purpose}
+- **Approach**: {approach}
+- **Work-Life Balance**: {wlb_stance}
+
+### Stance Towards Team Members
+- {stance}
+
+---
+
+## Personality Profile
 
 ### MBTI
-- **タイプ**: {MBTIタイプ}
-- **特徴**:
-  - {1on1に影響しそうな特徴}
+- **Type**: {mbti_type}
+- **Characteristics**:
+  - {characteristic_affecting_1on1}
 
-### ストレングスファインダー TOP5
-| 順位 | 資質 | 実務での表れ |
-|------|------|-------------|
-| 1 | {資質1} | {表れ1} |
-| 2 | {資質2} | {表れ2} |
-| 3 | {資質3} | {表れ3} |
-| 4 | {資質4} | {表れ4} |
-| 5 | {資質5} | {表れ5} |
+### StrengthsFinder TOP5
+| Rank | Strength | How It Shows in Work |
+|------|----------|---------------------|
+| 1 | {strength1} | {manifestation1} |
+| 2 | {strength2} | {manifestation2} |
+| 3 | {strength3} | {manifestation3} |
+| 4 | {strength4} | {manifestation4} |
+| 5 | {strength5} | {manifestation5} |
 
-### 弱み・苦手なこと
-- {弱み}
+### Weaknesses / Areas for Growth
+- {weakness}
 
 ---
 
-## タスク
+## Update History
 
-以下の情報をもとに、次回の1on1で話すべき話題を3〜5個提案してください。
-
-### 入力情報
-- ユーザープロファイル
-- 過去のセッション履歴（直近最大10件）
-- メンバーからのリクエスト（あれば）
-
-### 出力形式
-
-## 話題提案（初稿）
-
-### 1. [話題タイトル]
-**意図**: なぜこの話題を取り上げるのか
-**質問例**: 具体的にどう切り出すか
-
-### 2. [話題タイトル]
-...
-
-（3〜5個）
-
-### 注意点
-- 質問は傾聴ベースで、本人の考えを引き出すものにする
-- 断定的なアドバイスではなく、本人が考えるきっかけになる質問を
-- 過去のセッションで出た本音や欲求があれば、それを深掘りする話題を含める
-- メンバーからのリクエストがあれば、必ず含める
+| Date | Changes |
+|------|---------|
+| {date} | Initial creation |
 ```
 
-## 完了後
+## After Completion
 
-1. 作成したファイルのパスを表示
-2. 「サンプルは `./samples/manager-profile-sample.md` を参照してください」と案内
-3. 「次は `/create-user` でメンバーを登録してください」と案内
+1. Display the path of the created file
+2. Guide: "For samples, refer to `./samples/en/manager-profile.md` or `./samples/ja/manager-profile.md`"
+3. Guide: "Next, register team members with `/create-user`"

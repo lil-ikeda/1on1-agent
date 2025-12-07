@@ -1,190 +1,201 @@
 # complete-session
 
-1on1セッション終了後に、議事録をもとにセッション内容を整理し、メンバー評価・マネージャーレビューを行い、関連ファイルを更新します。
+After a 1on1 session ends, organizes session content based on transcript, performs member assessment and manager review, and updates related files.
 
-## 引数
+## Arguments
 
-- `$ARGUMENTS`: ユーザー名（必須）
+- `$ARGUMENTS`: Username (required)
 
-## 手順
+## Language Setting
 
-### 1. 入力検証
+1. Read `./manager-profile.md` to get the manager's System Output Language settings
+2. Read `./users/$ARGUMENTS/profile.md` to get the member's 1on1 Language setting
+3. Determine output language:
+   - Use member's "1on1 Language" if specified
+   - Otherwise, use manager's "Session Files" language setting
+   - Fall back to manager's Primary Language
 
-- `$ARGUMENTS` が空の場合、`./users/` 配下のユーザー一覧を表示して選択を促す
-- 指定されたユーザーのディレクトリが存在しない場合、エラーを表示
+All session content and updates should be in the determined output language.
 
-### 2. 情報収集
+## Procedure
 
-以下のファイルを読み込む：
+### 1. Input Validation
 
-- `./users/$ARGUMENTS/profile.md` - ユーザープロファイル
-- `./users/$ARGUMENTS/sessions/` 配下の本日または直近のセッションファイル
-- `./users/$ARGUMENTS/sessions/` 配下の過去セッション（文脈理解のため、直近最大5件）
+- If `$ARGUMENTS` is empty, display the list of users under `./users/` and prompt for selection
+- If the specified user's directory doesn't exist, display an error
 
-### 3. 文字起こしの収集
+### 2. Information Gathering
 
-ユーザーに以下を質問：
+Read the following files:
 
-「セッションの文字起こし（Google Meet の文字起こし機能など）を貼り付けてください」
+- `./users/$ARGUMENTS/profile.md` - User profile
+- Today's or most recent session file under `./users/$ARGUMENTS/sessions/`
+- Past sessions under `./users/$ARGUMENTS/sessions/` (up to 5 most recent for context)
 
-※ 文字起こしが貼り付けられるまで待機
+### 3. Collect Transcript
 
-**注意**: 議事録の要約ではなく、生の文字起こしを使用すること。要約を通すとニュアンス（トーンや打ち消し表現など）が失われ、スコアリングの精度が下がる。
+Ask the user:
 
-### 4. 文字起こしの分析と整理
+"Please paste the session transcript (e.g., from Google Meet's transcription feature)"
 
-貼り付けられた文字起こしから以下を抽出：
+※ Wait until the transcript is pasted
 
-- **話した内容の概要**: 主要なトピックを箇条書きで整理
-- **本人から出た発言・本音**: メンバーの言葉を**そのまま引用**（トーンやニュアンスを保持）
-- **次回までのアクション**: 誰が何をするか明確に
-- **次回フォローすべき事項**: 継続して確認が必要な項目
+**Important**: Use raw transcript, not a summary of meeting notes. Summaries lose nuances (tone, hedging expressions, etc.) which reduces scoring accuracy.
 
-### 5. メンバー評価（3つのスコア算出）
+### 4. Analyze and Organize Transcript
 
-`./agents/member-assessment.md` の指示に従い、以下のスコアを算出：
+Extract the following from the pasted transcript:
 
-#### 退職リスク (1-5)
-| スコア | レベル | 説明 |
-|--------|--------|------|
-| 1 | 極低 | 退職の兆候なし、高いエンゲージメント |
-| 2 | 低 | 安定しているが、軽微な不満あり |
-| 3 | 中 | 注意が必要な兆候あり |
-| 4 | 高 | 明確な警告サイン、転職活動の可能性 |
-| 5 | 極高 | 退職間近または意思表明済み |
+- **Topics Discussed**: Organize main topics as bullet points
+- **Member's Comments & Insights**: **Quote the member's words verbatim** (preserve tone and nuance)
+- **Action Items for Next Time**: Clearly state who does what
+- **Items to Follow Up**: Items requiring continued attention
 
-#### 休職リスク (1-5)
-| スコア | レベル | 説明 |
-|--------|--------|------|
-| 1 | 極低 | 健康状態良好、ストレス管理できている |
-| 2 | 低 | 軽いストレスあり、対処可能 |
-| 3 | 中 | ストレス蓄積の兆候、要観察 |
-| 4 | 高 | バーンアウト兆候、介入必要 |
-| 5 | 極高 | 深刻な状態、即時対応必要 |
+### 5. Member Assessment (Calculate 3 Scores)
 
-#### モチベーションスコア (1-5)
-| スコア | レベル | 説明 |
-|--------|--------|------|
-| 1 | 極低 | 意欲喪失、仕事に無関心 |
-| 2 | 低 | 消極的、最低限のみ |
-| 3 | 中 | 普通、可もなく不可もなく |
-| 4 | 高 | 意欲的、積極的に取り組む |
-| 5 | 極高 | 非常に高い、自発的に挑戦 |
+Follow instructions in `./agents/member-assessment.md` to calculate the following scores:
 
-各スコアには必ず **根拠**（文字起こしからの**具体的な発言を引用**）を添える。
+#### Turnover Risk (1-5)
+| Score | Level | Description |
+|-------|-------|-------------|
+| 1 | Very Low | No signs of turnover, high engagement |
+| 2 | Low | Stable with minor complaints |
+| 3 | Medium | Warning signs present, needs attention |
+| 4 | High | Clear warning signs, possible job hunting |
+| 5 | Very High | Resignation imminent or already expressed |
 
-**スコアリング時の注意点**:
-- 発言のトーンや打ち消し表現（「ちょっと」「別にめっちゃ〜じゃないけど」など）を見落とさない
-- 要約された言葉ではなく、本人の実際の言葉をそのまま引用する
-- 極端なスコア（1または5）をつける場合は、より慎重に根拠を確認する
+#### Burnout Risk (1-5)
+| Score | Level | Description |
+|-------|-------|-------------|
+| 1 | Very Low | Good health, managing stress well |
+| 2 | Low | Light stress, manageable |
+| 3 | Medium | Signs of accumulated stress, monitor |
+| 4 | High | Burnout symptoms, intervention needed |
+| 5 | Very High | Serious condition, immediate action needed |
 
-### 6. マネージャー（1on1品質）レビュー
+#### Motivation Score (1-5)
+| Score | Level | Description |
+|-------|-------|-------------|
+| 1 | Very Low | Lost motivation, disengaged |
+| 2 | Low | Passive, doing bare minimum |
+| 3 | Medium | Normal, neither good nor bad |
+| 4 | High | Motivated, proactively engaged |
+| 5 | Very High | Highly motivated, self-driven challenges |
 
-`./agents/manager-review.md` の指示に従い、1on1セッションの品質をレビュー：
+Each score must include **rationale** (with **specific quotes from transcript**).
 
-- **傾聴度**: メンバーの話をどれだけ引き出せたか
-- **適切な質問**: 本音を引き出す質問ができていたか
-- **フォローアップ**: 前回からの継続事項を確認できたか
-- **具体的なサポート**: ブロッカー解消に向けた行動ができたか
-- **次回への布石**: 次回につながる話題設定ができたか
+**Scoring Precautions**:
+- Don't miss tone or hedging expressions ("a bit", "not super... but", etc.)
+- Quote the person's actual words, not summarized versions
+- Be extra careful when assigning extreme scores (1 or 5) and verify rationale
 
-評価結果は以下の形式で出力：
+### 6. Manager (1on1 Quality) Review
+
+Follow instructions in `./agents/manager-review.md` to review session quality:
+
+- **Listening Quality**: How well was the member's voice drawn out?
+- **Quality of Questions**: Were questions effective at drawing out true feelings?
+- **Follow-up**: Were carryover items from previous sessions confirmed?
+- **Support Provided**: Were actions taken to resolve blockers?
+- **Topic Selection**: Were topics set up for the next session?
+
+Output evaluation in the following format:
 
 ```
-## マネージャーレビュー
+## Manager Review
 
-### 総合評価: ★★★☆☆ (3/5)
+### Overall Rating: ★★★☆☆ (3/5)
 
-### 良かった点
+### What Went Well
 - ...
 
-### 改善点
+### Areas for Improvement
 - ...
 
-### 次回意識すること
+### Focus Points for Next Session
 - ...
 ```
 
-### 7. profile.md の更新
+### 7. Update profile.md
 
-議事録とスコア評価をもとに、以下のセクションを更新：
+Based on transcript and score evaluation, update the following sections:
 
-- **現状** > 現在のプロジェクト/タスク
-- **現状** > 直近の課題・悩み
-- **現状** > モチベーション状態
-- **現状** > 健康・ワークライフバランス
-- **メンバーからのリクエスト**（次回話したいことがあれば）
-- **1on1履歴サマリー** > 前回話した主なトピック
-- **1on1履歴サマリー** > 継続フォローが必要な事項
-- **1on1履歴サマリー** > 過去に出た本音・欲求
-- **更新履歴**（本日の更新内容を追記）
-- **最終更新**（日付を更新）
+- **Current Status** > Current Projects/Tasks
+- **Current Status** > Recent Challenges/Concerns
+- **Current Status** > Motivation Level
+- **Current Status** > Health/Work-Life Balance
+- **Requests from Member** (if there are topics for next time)
+- **1on1 History Summary** > Topics from Last Session
+- **1on1 History Summary** > Items Requiring Follow-up
+- **1on1 History Summary** > Past Insights/Desires Expressed
+- **Update History** (add today's update)
+- **Last Updated** (update date)
 
-### 8. セッションファイルの更新
+### 8. Update Session File
 
-本日のセッションファイル `./users/$ARGUMENTS/sessions/YYYY-MM-DD.md` を更新：
+Update today's session file `./users/$ARGUMENTS/sessions/YYYY-MM-DD.md`:
 
-- **セッション情報** > 所要時間
-- **セッション記録** > 話した内容
-- **セッション記録** > 本人から出た発言・本音
-- **セッション記録** > 次回までのアクション
-- **セッション記録** > 次回フォローすべき事項
-- **振り返り** > セッションの所感（マネージャーレビュー結果を記載）
+- **Session Info** > Duration
+- **Session Notes** > Topics Discussed
+- **Session Notes** > Member's Comments & Insights
+- **Session Notes** > Action Items for Next Time
+- **Session Notes** > Items to Follow Up
+- **Reflection** > Session Impressions (include manager review results)
 
-※ 新たに「メンバー評価スコア」セクションを追加：
+※ Add new "Member Assessment Score" section:
 
 ```markdown
 ---
 
-## メンバー評価スコア（AI算出）
+## Member Assessment Score (AI Generated)
 
-| 指標 | スコア | 根拠 |
-|------|--------|------|
-| 退職リスク | X/5 | ... |
-| 休職リスク | X/5 | ... |
-| モチベーション | X/5 | ... |
+| Metric | Score | Rationale |
+|--------|-------|-----------|
+| Turnover Risk | X/5 | ... |
+| Burnout Risk | X/5 | ... |
+| Motivation | X/5 | ... |
 
-### スコア推移（直近5回）
-<!-- 過去のスコアがあれば推移を記載 -->
+### Score Trends (Last 5 Sessions)
+<!-- Include score trends if past scores exist -->
 ```
 
-### 9. 次回セッションファイルの作成
+### 9. Create Next Session File
 
-ユーザーに質問：「次回のセッションファイルを作成しますか？ (y/n)」
+Ask the user: "Do you want to create the next session file? (y/n)"
 
-「y」の場合、`/create-session $ARGUMENTS` を実行
+If "y", execute `/create-session $ARGUMENTS`
 
-### 10. 完了報告
+### 10. Completion Report
 
-以下を表示：
+Display the following (in the output language):
 
 ```
-## 完了
+## Complete
 
-### 更新したファイル
+### Updated Files
 - ./users/$ARGUMENTS/profile.md
 - ./users/$ARGUMENTS/sessions/YYYY-MM-DD.md
 
-### メンバー評価スコア
-| 指標 | スコア |
-|------|--------|
-| 退職リスク | X/5 |
-| 休職リスク | X/5 |
-| モチベーション | X/5 |
+### Member Assessment Scores
+| Metric | Score |
+|--------|-------|
+| Turnover Risk | X/5 |
+| Burnout Risk | X/5 |
+| Motivation | X/5 |
 
-### マネージャーレビュー
-総合評価: ★★★☆☆ (X/5)
-- [改善点サマリー]
+### Manager Review
+Overall Rating: ★★★☆☆ (X/5)
+- [Improvement summary]
 
-### 次回フォロー事項
+### Follow-up Items for Next Session
 - ...
 ```
 
 ---
 
-## 注意事項
+## Important Notes
 
-- 議事録には機密情報が含まれる可能性があるため、外部には送信しない
-- スコア評価は参考値であり、最終判断はマネージャーが行う
-- 極端なスコア（1または5）が出た場合は、理由を詳しく確認する
-- マネージャーレビューは自己改善のためのものであり、評価には使用しない
+- Transcripts may contain confidential information; do not send to external services
+- Score evaluations are reference values; final judgment is made by the manager
+- If extreme scores (1 or 5) appear, verify the reasons in detail
+- Manager review is for self-improvement, not for performance evaluation

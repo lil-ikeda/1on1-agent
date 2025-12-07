@@ -1,102 +1,114 @@
 # create-session
 
-指定したメンバーの次回1on1セッション用のファイルを作成し、話すべき話題を提案します。
+Creates a session file for the specified member's next 1on1 and proposes topics to discuss.
 
-## 引数
+## Arguments
 
-- `$ARGUMENTS`: ユーザー名（必須）
+- `$ARGUMENTS`: Username (required)
 
-## 手順
+## Language Setting
 
-### 1. 入力検証
+1. Read `./manager-profile.md` to get the manager's System Output Language settings
+2. Read `./users/$ARGUMENTS/profile.md` to get the member's 1on1 Language setting
+3. Determine output language:
+   - Use member's "1on1 Language" if specified
+   - Otherwise, use manager's "Session Files" language setting
+   - Fall back to manager's Primary Language
 
-- `$ARGUMENTS` が空の場合、`./users/` 配下のユーザー一覧を表示して選択を促す
-- 指定されたユーザーのディレクトリが存在しない場合、エラーを表示
+All session content should be generated in the determined output language.
 
-### 2. 情報収集
+## Procedure
 
-以下のファイルを読み込む：
+### 1. Input Validation
 
-- `./manager-profile.md` - マネージャープロファイル
-- `./users/$ARGUMENTS/profile.md` - ユーザープロファイル
-- `./users/$ARGUMENTS/sessions/` 配下の直近最大10件のセッションファイル（日付降順）
+- If `$ARGUMENTS` is empty, display the list of users under `./users/` and prompt for selection
+- If the specified user's directory doesn't exist, display an error
 
-### 3. メンバーからのリクエスト確認
+### 2. Information Gathering
 
-ユーザーに質問：「メンバーから事前に話したいことのリクエストはありますか？（なければEnter）」
+Read the following files:
 
-### 4. 話題提案の生成（3〜4段階レビュー）
+- `./manager-profile.md` - Manager profile
+- `./users/$ARGUMENTS/profile.md` - User profile
+- Up to 10 most recent session files under `./users/$ARGUMENTS/sessions/` (in descending date order)
 
-#### Step 1: マネージャーエージェントによる初稿作成
+### 3. Confirm Requests from Member
 
-`./manager-profile.md` の指示に従い、話題を3〜5個提案
+Ask the user: "Does the member have any specific topics they want to discuss? (Press Enter if none)"
 
-#### Step 2: EMベストプラクティスエージェントによるレビュー
+### 4. Topic Proposal Generation (3-4 Stage Review)
 
-`./agents/em-best-practice.md` の指示に従い、Step 1の出力をレビュー
+#### Step 1: Initial Draft by Manager Agent
 
-#### Step 3: 技術エージェントによるレビュー
+Based on the instructions in `./manager-profile.md`, propose 3-5 topics
 
-メンバーの**役割**に応じて、適切な技術エージェントを選択してレビュー：
+#### Step 2: Review by EM Best Practice Agent
 
-| 役割 | エージェントファイル |
-|------|---------------------|
-| QAエンジニア | `./agents/tech-specialist-qa.md` |
-| SRE / インフラエンジニア | `./agents/tech-specialist-sre.md` |
-| MLエンジニア | `./agents/tech-specialist-ml.md` |
-| Backendエンジニア | `./agents/tech-specialist-backend.md` |
-| Frontendエンジニア | `./agents/tech-specialist-frontend.md` |
+Review Step 1 output following instructions in `./agents/em-best-practice.md`
 
-※ 役割が上記に該当しない場合は、最も近いものを選択するか、スキップ
+#### Step 3: Review by Tech Specialist Agent
 
-#### Step 4: キャリアエージェントによるレビュー（オプショナル）
+Select the appropriate tech agent based on member's **Role** and review:
 
-`./agents/career-agent.md` の指示に従い、以下の条件に該当する場合のみレビューを実施：
+| Role | Agent File |
+|------|------------|
+| QA Engineer | `./agents/tech-specialist-qa.md` |
+| SRE / Infrastructure Engineer | `./agents/tech-specialist-sre.md` |
+| ML Engineer | `./agents/tech-specialist-ml.md` |
+| Backend Engineer | `./agents/tech-specialist-backend.md` |
+| Frontend Engineer | `./agents/tech-specialist-frontend.md` |
 
-- パフォーマンスが実感できていない
-- 転職可能性が高い（在籍2〜3年超、成長機会への不満など）
-- 昇進・役割変更を望んでいる（リーダー、マネージャー志向など）
-- スキルチェンジを検討している（職種転換：QA→開発、開発→SREなど）
-- キャリアの方向性に迷いがある（本人が明確に言語化できていない）
-- 社外活動が増えている（副業、勉強会登壇、OSSなど）
-- ライフイベントが近い（結婚、出産、介護など、キャリア観に影響するもの）
+※ If role doesn't match any above, select the closest one or skip
 
-該当しない場合はスキップ
+#### Step 4: Review by Career Agent (Optional)
 
-### 5. 最終版の作成
+Follow instructions in `./agents/career-agent.md` and only conduct review if the following conditions apply:
 
-各段階のレビュー結果を統合し、最終的な話題リストを作成：
+- Performance not being recognized
+- High turnover potential (tenure 2-3+ years, dissatisfaction with growth opportunities, etc.)
+- Seeking promotion or role change (leadership/management aspirations, etc.)
+- Considering skill change (career transition: QA→Dev, Dev→SRE, etc.)
+- Career direction uncertainty (unable to articulate clearly)
+- Increased external activities (side work, conference talks, OSS, etc.)
+- Upcoming life events (marriage, childbirth, caregiving - events that may impact career perspective)
 
-- 重複を排除
-- 優先度順に並べ替え
-- 3〜5個に絞り込み
+Skip if none apply
 
-### 6. セッションファイルの作成
+### 5. Create Final Version
 
-`./templates/session.md` をベースに `./users/$ARGUMENTS/sessions/YYYY-MM-DD.md` を作成：
+Integrate review results from all stages to create the final topic list:
 
-- 今日の日付を使用
-- メンバーからのリクエストがあれば記載
-- 「今回話すべき話題」セクションに最終版の話題を記載
-- 「各話題の背景・意図」セクションに各話題の意図を記載
+- Remove duplicates
+- Sort by priority
+- Narrow down to 3-5 topics
 
-### 7. 完了報告
+### 6. Create Session File
 
-以下を表示：
-- 作成したファイルのパス
-- 提案した話題のサマリー
-- 「セッション後は `/complete-session` を実行してください」というリマインド
+Create `./users/$ARGUMENTS/sessions/YYYY-MM-DD.md` based on `./templates/session.md`:
 
-## 出力例
+- Use today's date
+- Include requests from member if any
+- Fill "Topics to Discuss" section with final topics
+- Fill "Background & Intent for Each Topic" section with intent for each topic
+- All content should be in the determined output language
+
+### 7. Completion Report
+
+Display the following (in the output language):
+- Path of the created file
+- Summary of proposed topics
+- Reminder: "After the session, run `/complete-session`"
+
+## Output Example
 
 ```
-セッションファイルを作成しました: ./users/tanaka/sessions/2025-11-28.md
+Session file created: ./users/tanaka/sessions/2025-11-28.md
 
-## 今回の話題（3件）
+## Topics for This Session (3 items)
 
-1. 前回話していたキャリアの方向性について
-2. 最近のテスト自動化の進捗
-3. チーム内でのコミュニケーションについて
+1. Follow up on career direction discussed last time
+2. Recent test automation progress
+3. Team communication
 
-セッション後は `/complete-session tanaka` を実行してください！
+After the session, run `/complete-session tanaka`!
 ```

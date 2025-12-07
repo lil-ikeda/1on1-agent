@@ -1,99 +1,109 @@
-# ユーザープロファイル - {{user_name}}
+# User Profile - {{user_name}}
 
-**作成日**: {{created_date}}
-**最終更新**: {{updated_date}}
-
----
-
-## 基本情報
-
-| 項目 | 内容 |
-|------|------|
-| 名前 | {{user_name}} |
-| メールアドレス | |
-| 所属チーム | |
-| 役割 | |
-| 役職・グレード | |
-| 入社日 | |
-| チーム配属日 | |
+**Created**: {{created_date}}
+**Last Updated**: {{updated_date}}
 
 ---
 
-## キャリア・志向
+## Language Profile
 
-### キャリア目標
-- **短期（1年以内）**:
-- **中長期（3年以上）**:
-
-### 興味のある技術・領域
--
-
-### 強み（本人認識）
--
-
-### 伸ばしたいスキル
--
-
-### 仕事で大事にしていること
--
+| Item | Value |
+|------|-------|
+| Primary Language | |
+| Secondary Languages | |
+| 1on1 Language | <!-- Language to use in 1on1 with this member. Leave empty to use manager's default. --> |
 
 ---
 
-## コミュニケーション
+## Basic Information
 
-| 項目 | 内容 |
-|------|------|
-| 1on1での話しやすさ | ★☆☆☆☆（1-5） |
-| 好むフィードバックスタイル | 直接的 / 間接的 / 具体例重視 |
-| 注意が必要なトピック | |
+| Item | Value |
+|------|-------|
+| Name | {{user_name}} |
+| Email | |
+| Team | |
+| Role | |
+| Title/Grade | |
+| Join Date | |
+| Team Assignment Date | |
 
 ---
 
-## 現状
+## Career & Aspirations
 
-### 現在のプロジェクト/タスク
+### Career Goals
+- **Short-term (within 1 year)**:
+- **Long-term (3+ years)**:
+
+### Areas of Interest (Tech/Domain)
 -
 
-### 直近の課題・悩み
+### Strengths (Self-recognized)
 -
 
-### モチベーション状態
+### Skills to Develop
 -
 
-### 健康・ワークライフバランス
+### Work Values
 -
 
 ---
 
-## メンバーからのリクエスト
+## Communication
 
-<!-- メンバーから「次回これを話したい」と言われた内容を記録 -->
+| Item | Value |
+|------|-------|
+| Openness in 1on1 | ★☆☆☆☆ (1-5) |
+| Preferred Feedback Style | Direct / Indirect / Example-based |
+| Sensitive Topics | |
+
+---
+
+## Current Status
+
+### Current Projects/Tasks
+-
+
+### Recent Challenges/Concerns
+-
+
+### Motivation Level
+-
+
+### Health/Work-Life Balance
 -
 
 ---
 
-## 1on1履歴サマリー
+## Requests from Member
 
-### 前回話した主なトピック
--
-
-### 継続フォローが必要な事項
--
-
-### 過去に出た本音・欲求
+<!-- Topics the member wants to discuss in the next 1on1 -->
 -
 
 ---
 
-## フリーメモ
+## 1on1 History Summary
 
-<!-- その他、このメンバーについて記録しておきたいこと -->
+### Topics from Last Session
+-
+
+### Items Requiring Follow-up
+-
+
+### Past Insights/Desires Expressed
+-
+
+---
+
+## Free Notes
+
+<!-- Other notes about this member -->
 
 
 ---
 
-## 更新履歴
+## Update History
 
-| 日付 | 変更内容 |
-|------|----------|
-| {{created_date}} | 初版作成 |
+| Date | Changes |
+|------|---------|
+| {{created_date}} | Initial creation |
