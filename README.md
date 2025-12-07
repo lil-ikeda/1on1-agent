@@ -51,6 +51,67 @@ By defining the EM's values and style in `manager-profile.md`, the AI functions 
 
 ---
 
+## Workflow Overview
+
+```mermaid
+flowchart TB
+    subgraph PREP["Initial Setup Phase"]
+        direction TB
+        A["/init"] --> B["manager-profile.md created"]
+        B --> C["/create-user"]
+        C --> D["profile.md created"]
+    end
+
+    subgraph SESSION_PREP["Session Preparation Phase"]
+        direction TB
+        E["/create-session {user}"] --> F["Information Gathering"]
+        F --> G["Load profile.md + Past Sessions"]
+        G --> H["Confirm Member Requests"]
+
+        subgraph REVIEW["Multi-Agent Review"]
+            direction TB
+            I["Step 1: Manager Agent<br/>Initial draft of 5-10 topics"]
+            J["Step 2: EM Best Practice<br/>Review from general perspective"]
+            K["Step 3: Tech Specialist<br/>Role-specific expertise"]
+            L["Step 4: Career Agent<br/>(Conditional)"]
+            I --> J --> K --> L
+        end
+
+        H --> REVIEW
+        REVIEW --> M["Narrow down to 3-5 topics"]
+        M --> N["Create sessions/YYYY-MM-DD.md"]
+    end
+
+    subgraph SESSION["1on1 Session"]
+        direction TB
+        O["Conduct Session<br/>(Dialogue based on proposed topics)"]
+    end
+
+    subgraph POST["Session Completion Phase"]
+        direction TB
+        P["/complete-session {user}"] --> Q["Paste Transcript"]
+        Q --> R["Extract Comments & Insights"]
+
+        subgraph EVAL["Evaluation"]
+            direction TB
+            S["Member Assessment<br/>Turnover/Burnout Risk, Motivation"]
+            T["Manager Review<br/>Listening, Questions, Support"]
+        end
+
+        R --> EVAL
+        EVAL --> U["Update profile.md"]
+        EVAL --> V["Update session.md"]
+        U --> W["Ready for Next Session"]
+    end
+
+    PREP --> SESSION_PREP
+    SESSION_PREP --> SESSION
+    SESSION --> POST
+    POST -.-> SESSION_PREP
+```
+
+---
+
 ## Setup
 
 ### Prerequisites
